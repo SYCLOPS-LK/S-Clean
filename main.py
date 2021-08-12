@@ -1,6 +1,5 @@
 # Import Modules
 from tkinter import *
-from classes import ColorPrint
 from time import strftime, sleep
 import os, shutil, asyncio, subprocess, getenv
 from threading import Thread
@@ -27,8 +26,8 @@ windows_folder_path = ('C:\\Windows\\temp')
 
 # Defining Functions
 def mouse_wheel_click_event(event):
-    ColorPrint.print_info(f"X : {event.x}")
-    ColorPrint.print_info(f"Y : {event.y}")
+    print(f"X : {event.x}")
+    print(f"Y : {event.y}")
 
 def cleaning_proccess():
     optimize_button.config(state = DISABLED)
@@ -204,21 +203,13 @@ time_label = Label(
 
 # Rendering Widgets
 logo_label.pack(pady = 15)
-ColorPrint.print_pass("logo_label Rendered")
 name_label.pack()
-ColorPrint.print_pass("name_label Rendered")
 author_label.pack()
-ColorPrint.print_pass("author_label Rendered")
 optimize_button.pack(pady = 20)
-ColorPrint.print_pass("optimize_button Rendered")
 optimize_status_label.pack()
-ColorPrint.print_pass("optimize_status_label Rendered")
 time_label.place(x = 150, y = 381)
-ColorPrint.print_pass("time_label Rendered")
 
 update_time()
 
 if __name__ == "__main__": # Executing Main file
-    ColorPrint.print_pass("App Started")
     main_window.mainloop()
-    ColorPrint.print_pass("App Stopped")
