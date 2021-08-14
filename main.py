@@ -108,20 +108,6 @@ def cleaning_proccess():
             optimize_status_label.config(text = "SoftwareDistribution Folder Found", fg = PURPLE)
             sleep(1)
 
-            try:
-                os.system('net stop "wuauserv"')
-                optimize_status_label.config(text = "wuauserv Service Stopped", fg = PURPLE)
-                sleep(1)
-            except:
-                messagebox.showwarning(title = "Warning", message = "Failed to stop wuauserv service")
-
-            try:
-                os.system('net stop "bits"')
-                optimize_status_label.config(text = "bits Service Stopped", fg = PURPLE)
-                sleep(1)
-            except:
-                messagebox.showwarning(title = "Warning", message = "Failed to stop bits service")
-
             for filename in os.listdir(softwaredistribution_folder_path):
                 file_path = os.path.join(softwaredistribution_folder_path, filename)
                 try:
@@ -133,13 +119,6 @@ def cleaning_proccess():
                     continue
             optimize_status_label.config(text = "SoftwareDistribution Folder Cleaned", fg = PURPLE)
             sleep(1)
-
-            try:
-                os.system('net start "bits"')
-                optimize_status_label.config(text = "bits Service Started", fg = PURPLE)
-                sleep(1)
-            except:
-                messagebox.showwarning(title = "Warning", message = "Failed to start bits service")
 
         else:
             messagebox.showerror(title = "Error", message = f"{softwaredistribution_folder_path} not found")
