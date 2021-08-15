@@ -1,6 +1,6 @@
 # Import Modules
 import os
-from os import getenv
+from os                             import getenv
 from tkinter                        import *
 from tkinter                        import messagebox
 from time                           import strftime, sleep
@@ -12,10 +12,10 @@ from functions.optimize             import OptimizeProcess
 
 # Constants
 NAME = "S CLEAN"
-VERSION = "1.2.6"
+VERSION = "v1.3.0"
 WIDTH = 250
 HEIGHT = 420
-BACKGROUND = "#1A2128"
+BACKGROUND = "#0F1320"
 FOREGROUND = "#FFFFFF"
 TOP = "top"
 BOTTOM = "bottom"
@@ -141,8 +141,9 @@ global root
 root = Tk() # Definging Main Window
 root.config(bg = BACKGROUND)
 root.resizable(False, False)
-root.iconphoto(True, PhotoImage(file = "YOUR ICON PATH"))
+root.iconphoto(True, PhotoImage(file = "assets\\images\\icon.png"))
 root.overrideredirect(True)
+root.attributes("-alpha", 0.9)
 
 # Defining Variables inside The Mainloop
 screen_width = root.winfo_screenwidth()
@@ -155,19 +156,19 @@ root.geometry(f"{WIDTH}x{HEIGHT}+{x_cordinate}+{y_cordinate}")
 
 # Defining Widgets
 logo_photo_image = PhotoImage(
-    file = "YOUR LOGO PATH"
+    file = "assets\\images\\logo.png"
 )
 
 optimize_label_photo_image = PhotoImage(
-    file = "BOOST IMAGE PATH"
+    file = "assets\\images\\boost.png"
 )
 
 close_button_photo_image = PhotoImage(
-    file = "CLOSE IMAGE PATH"
+    file = "assets\\images\\close.png"
 )
 
 minimize_button_photo_image = PhotoImage(
-    file = "MINIMIZE IMAGE PATH"
+    file = "assets\\images\\minimize.png"
 )
 
 title_bar_frame = Frame(
@@ -282,7 +283,7 @@ title_bar_frame.pack(side = TOP, fill = "both")
 close_button.pack(side = RIGHT)
 logo_label.pack(pady = 15)
 name_label.pack()
-version_label.place(x = 182, y = 140)
+version_label.place(x = 178, y = 140)
 author_label.pack()
 optimize_button.pack(pady = 20)
 optimize_status_label.pack()
