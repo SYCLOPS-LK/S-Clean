@@ -9,10 +9,11 @@ from PIL                            import Image
 
 from functions.admin_privilege      import check_admin_privilege
 from functions.optimize             import OptimizeProcess
+from functions.add_to_registry      import AddToRegistry
 
 # Constants
 NAME = "S CLEAN"
-VERSION = "v1.3.0"
+VERSION = "v1.3.8"
 WIDTH = 250
 HEIGHT = 420
 BACKGROUND = "#0F1320"
@@ -35,11 +36,20 @@ softwaredistribution_folder_path = ("C:\\Windows\\SoftwareDistribution\\Download
 # Defining Functions
 def cleaning_proccess():
 
+    optimize_status_label.config(text = f"Checking for Admin Privilege".upper())
+    sleep(2)
     # Checking Admin privilege
     if check_admin_privilege() == True:
         optimize_status_label.config(text = f"Admin Privilege Granted".upper())
         sleep(1)
         optimize_button.config(state = DISABLED, text = "OPTIMIZING")
+
+        # Performing Clean Manager Process
+        optimize_status_label.config(text = f"Performing Disk Cleanup".upper())
+        sleep(1)
+        OptimizeProcess.windows_clean_manager()
+        optimize_status_label.config(text = f"Disk Cleanup Stopped".upper())
+        sleep(1)
 
         # Clean Prefetch Folder
         if os.path.isdir(prefetch_folder_path):
@@ -85,7 +95,7 @@ def cleaning_proccess():
 
         # Adjust System Latency
         try:
-            OptimizeProcess.refuce_system_latency()
+            OptimizeProcess.reduce_system_latency()
             optimize_status_label.config(text = "System Latency Lowered".upper())
             sleep(1)
         except Exception as e:
@@ -143,7 +153,7 @@ root.config(bg = BACKGROUND)
 root.resizable(False, False)
 root.iconphoto(True, PhotoImage(file = "assets\\images\\icon.png"))
 root.overrideredirect(True)
-root.attributes("-alpha", 0.9)
+root.attributes("-alpha", 0.9, "-topmost", True)
 
 # Defining Variables inside The Mainloop
 screen_width = root.winfo_screenwidth()
@@ -298,4 +308,7 @@ title_bar_frame.bind("<B1-Motion>", drag_window_event)
 
 if __name__ == "__main__": # Executing Main file
     update_time()
+    AddToRegistry()
+    OptimizeProcess.log_data()
+    OptimizeProcess.check_sub_folders()
     root.mainloop()
